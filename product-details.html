@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - ShopSphere</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="header">
+        <div class="container">
+            <div class="header-top">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-shopping-bag"></i> ShopSphere
+                    <span class="logo-sub">Plus <i class="fas fa-plus-circle"></i></span>
+                </a>
+
+                <div class="search-bar">
+                    <form id="header-search-form" class="search-form">
+                        <input type="text" id="header-search-input" class="search-input" placeholder="Search for products, brands and more..." autocomplete="off">
+                        <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+
+                <div class="header-actions">
+                    <button class="icon-btn" id="theme-toggle-btn" title="Toggle Dark Mode">
+                        <i class="fas fa-moon"></i> Theme
+                    </button>
+
+                    <a href="wishlist.html" class="icon-btn" title="Wishlist">
+                        <i class="far fa-heart"></i> Wishlist
+                        <span class="badge" id="wishlist-count">0</span>
+                    </a>
+
+                    <a href="cart.html" class="icon-btn" title="Shopping Cart">
+                        <i class="fas fa-shopping-cart"></i> Cart
+                        <span class="badge" id="cart-count">0</span>
+                    </a>
+
+                    <div id="auth-status-container">
+                        <a href="login.html" class="auth-btn">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Breadcrumb -->
+        <div style="margin-top: 1.25rem; font-size: 0.85rem; color: var(--text-muted);">
+            <a href="index.html">Home</a> &gt; <a href="products.html">Products</a> &gt; <span id="breadcrumb-title">Product Details</span>
+        </div>
+
+        <!-- Detail Container -->
+        <div id="product-detail-container" class="product-detail-layout">
+            <!-- Populated via JS -->
+        </div>
+
+        <!-- Product Specifications Section -->
+        <div style="background-color: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.75rem; margin-bottom: 2rem;">
+            <h3 class="section-title" style="margin-bottom: 1.25rem; font-size: 1.2rem;">Product Specifications</h3>
+            <table class="specs-table" id="product-specs-table">
+                <!-- Specs Populated via JS -->
+            </table>
+        </div>
+
+        <!-- Related Products Section -->
+        <section class="section" style="margin-bottom: 2rem;">
+            <div class="section-header">
+                <h2 class="section-title">Similar Products You Might Like</h2>
+            </div>
+            <div id="related-products-grid" class="products-grid">
+                <!-- Populated via JS -->
+            </div>
+        </section>
+
+        <!-- Recently Viewed Products Section -->
+        <section id="detail-recent-section" class="section" style="margin-bottom: 3rem; display: none;">
+            <div class="section-header">
+                <h2 class="section-title"><i class="fas fa-history" style="color: var(--primary-color);"></i> Recently Viewed Items</h2>
+            </div>
+            <div id="detail-recent-grid" class="products-grid">
+                <!-- Populated via JS -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+                <p>&copy; 2026 ShopSphere Inc. All rights reserved. Full Stack Mini Project.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Scripts -->
+    <script src="js/products.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        let selectedColor = null;
+        let selectedSize = null;
+        let selectedQty = 1;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id') || 101;
+            const product = ProductRepository.getById(productId);
+
+            if (!product) {
+                window.location.href = 'products.html';
+                return;
+            }
+
+            // Save to Recently Viewed
+            Storage.addRecentlyViewed(product.id);
+
+            document.title = `${product.name} - ShopSphere`;
+            document.getElementById('breadcrumb-title').textContent = product.name;
+
+            selectedColor = product.colors && product.colors[0] ? product.colors[0] : null;
+            selectedSize = product.sizes && product.sizes[0] ? product.sizes[0] : null;
+
+            const isSaved = Storage.isInWishlist(product.id);
+            const galleryImages = product.images && product.images.length > 0 ? product.images : [product.image];
+
+            const detailContainer = document.getElementById('product-detail-container');
+            detailContainer.innerHTML = `
+                <div class="detail-gallery">
+                    <div class="detail-main-img-container">
+                        <img src="${galleryImages[0]}" alt="${product.name}" class="detail-main-img" id="main-detail-img">
+                    </div>
+                    ${galleryImages.length > 1 ? `
+                        <div class="gallery-thumbnails">
+                            ${galleryImages.map((imgUrl, idx) => `
+                                <img src="${imgUrl}" class="thumb-img ${idx === 0 ? 'active' : ''}" onclick="switchDetailImg('${imgUrl}', this)">
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                </div>
+
+                <div class="detail-info">
+                    <div style="font-size: 0.85rem; font-weight: 700; color: var(--primary-color); text-transform: uppercase;">${product.brand}</div>
+                    <h1 class="detail-title" style="font-size: 1.6rem; margin-bottom: 0.5rem;">${product.name}</h1>
+                    
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <span class="rating-pill" style="font-size: 0.85rem; padding: 3px 8px;">${product.rating} <i class="fas fa-star" style="font-size:0.75rem;"></i></span>
+                        <span style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">${product.reviews.toLocaleString('en-IN')} Ratings &amp; Reviews</span>
+                        ${product.isAssured ? `<span class="assured-tag"><i class="fas fa-check-circle"></i> Assured</span>` : ''}
+                    </div>
+
+                    <div class="detail-price-box" style="margin-bottom: 1rem;">
+                        <span class="detail-price" style="font-size: 2.2rem; color: var(--text-main);">₹${product.price.toLocaleString('en-IN')}</span>
+                        ${product.originalPrice > product.price ? `
+                            <span class="detail-original-price" style="font-size: 1.2rem;">₹${product.originalPrice.toLocaleString('en-IN')}</span>
+                            <span class="detail-discount-badge" style="background-color: var(--success-color);">${product.discount}% OFF</span>
+                        ` : ''}
+                    </div>
+
+                    <!-- Flipkart-Style Available Bank Offers -->
+                    <div class="bank-offers-box">
+                        <div class="bank-offer-title"><i class="fas fa-percentage"></i> Available Offers</div>
+                        ${product.offers ? product.offers.map(off => `
+                            <div class="bank-offer-item"><i class="fas fa-tag" style="color: var(--success-color); font-size: 0.75rem; margin-top: 3px;"></i> <span><strong>Bank Offer:</strong> ${off}</span></div>
+                        `).join('') : `
+                            <div class="bank-offer-item"><i class="fas fa-tag" style="color: var(--success-color); font-size: 0.75rem;"></i> <span><strong>Bank Offer:</strong> 5% Cashback on ShopSphere Axis Card</span></div>
+                        `}
+                    </div>
+
+                    <!-- Delivery Pincode Checker -->
+                    <div class="pincode-box">
+                        <i class="fas fa-map-marker-alt" style="color: var(--primary-color);"></i>
+                        <input type="text" id="pincode-input" class="pincode-input" placeholder="Enter Pincode (e.g. 400001)" value="400001">
+                        <button class="pincode-btn" onclick="checkPincode()">Check</button>
+                    </div>
+                    <div id="pincode-result" style="font-size: 0.85rem; color: var(--success-color); font-weight: 600; margin-top: -0.5rem; margin-bottom: 1rem;">
+                        <i class="fas fa-truck"></i> Delivery by Tomorrow, 5 PM | Free Shipping
+                    </div>
+
+                    <p class="detail-description" style="font-size: 0.9rem; margin-bottom: 1.25rem;">${product.description}</p>
+
+                    ${product.colors && product.colors.length > 0 ? `
+                        <div class="variant-section">
+                            <span class="variant-label">Select Color: <strong id="selected-color-label">${selectedColor}</strong></span>
+                            <div class="variant-options">
+                                ${product.colors.map((c, idx) => `
+                                    <button class="variant-pill ${idx === 0 ? 'active' : ''}" onclick="selectColor('${c}', this)">${c}</button>
+                                `).join('')}
+                            </div>
+                        </div>
+                    ` : ''}
+
+                    ${product.sizes && product.sizes.length > 0 ? `
+                        <div class="variant-section">
+                            <span class="variant-label">Select Size: <strong id="selected-size-label">${selectedSize}</strong></span>
+                            <div class="variant-options">
+                                ${product.sizes.map((s, idx) => `
+                                    <button class="variant-pill ${idx === 0 ? 'active' : ''}" onclick="selectSize('${s}', this)">${s}</button>
+                                `).join('')}
+                            </div>
+                        </div>
+                    ` : ''}
+
+                    <!-- Trust Badges -->
+                    <div class="trust-badges">
+                        <div class="trust-badge-item">
+                            <i class="fas fa-sync-alt"></i>
+                            <span>7 Days Replacement</span>
+                        </div>
+                        <div class="trust-badge-item">
+                            <i class="fas fa-shipping-fast"></i>
+                            <span>Free Delivery</span>
+                        </div>
+                        <div class="trust-badge-item">
+                            <i class="fas fa-hand-holding-usd"></i>
+                            <span>Pay on Delivery</span>
+                        </div>
+                        <div class="trust-badge-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>1 Year Warranty</span>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-top: 0.5rem; margin-bottom: 1.5rem;">
+                        <span class="variant-label" style="margin-bottom: 0;">Quantity:</span>
+                        <div class="quantity-picker">
+                            <button class="qty-btn" onclick="adjustQty(-1)">-</button>
+                            <input type="text" id="detail-qty-input" class="qty-input" value="1" readonly>
+                            <button class="qty-btn" onclick="adjustQty(1)">+</button>
+                        </div>
+                    </div>
+
+                    <div class="detail-actions">
+                        <button class="btn btn-accent" style="flex: 1; padding: 0.9rem; font-size: 1.05rem;" onclick="Storage.addToCart(${product.id}, selectedQty, selectedColor, selectedSize)">
+                            <i class="fas fa-shopping-cart"></i> ADD TO CART
+                        </button>
+                        <button class="btn btn-primary" style="flex: 1; padding: 0.9rem; font-size: 1.05rem; background-color: #fb641b;" onclick="buyNow(${product.id})">
+                            <i class="fas fa-bolt"></i> BUY NOW
+                        </button>
+                        <button class="icon-btn ${isSaved ? 'active' : ''}" style="width: 50px; height: 50px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); color: var(--text-main);" onclick="handleWishlistToggle(${product.id}, this)">
+                            <i class="${isSaved ? 'fas' : 'far'} fa-heart" style="${isSaved ? 'color: var(--danger-color)' : ''}"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            // Specs Table
+            const specsTable = document.getElementById('product-specs-table');
+            let specsHTML = `
+                <tr><th>In The Box</th><td>1 Unit of ${product.name}, User Manual, Warranty Card</td></tr>
+                <tr><th>Brand</th><td>${product.brand}</td></tr>
+                <tr><th>Category</th><td>${product.category}</td></tr>
+                <tr><th>Stock Availability</th><td>${product.stock ? 'In Stock' : 'Out of Stock'}</td></tr>
+            `;
+            if (product.specs) {
+                for (const [key, value] of Object.entries(product.specs)) {
+                    specsHTML += `<tr><th>${key}</th><td>${value}</td></tr>`;
+                }
+            }
+            specsTable.innerHTML = specsHTML;
+
+            // Related Products Grid
+            const relatedGrid = document.getElementById('related-products-grid');
+            const related = ProductRepository.getByCategory(product.category)
+                .filter(p => p.id !== product.id)
+                .slice(0, 4);
+
+            if (related.length > 0) {
+                relatedGrid.innerHTML = related.map(p => createProductCardHTML(p)).join('');
+            } else {
+                relatedGrid.innerHTML = '<p style="color: var(--text-muted);">No similar products found in this category.</p>';
+            }
+
+            // Recently Viewed Carousel
+            const recentIds = Storage.getRecentlyViewed().filter(rId => rId !== product.id);
+            const recentSection = document.getElementById('detail-recent-section');
+            const recentGrid = document.getElementById('detail-recent-grid');
+            if (recentIds.length > 0 && recentGrid && recentSection) {
+                const recentProds = recentIds.map(rId => ProductRepository.getById(rId)).filter(Boolean).slice(0, 4);
+                if (recentProds.length > 0) {
+                    recentGrid.innerHTML = recentProds.map(p => createProductCardHTML(p)).join('');
+                    recentSection.style.display = 'block';
+                }
+            }
+        });
+
+        function switchDetailImg(url, thumbBtn) {
+            document.getElementById('main-detail-img').src = url;
+            document.querySelectorAll('.thumb-img').forEach(t => t.classList.remove('active'));
+            thumbBtn.classList.add('active');
+        }
+
+        function checkPincode() {
+            const code = document.getElementById('pincode-input').value.trim();
+            const res = document.getElementById('pincode-result');
+            if (/^\d{6}$/.test(code)) {
+                res.innerHTML = `<i class="fas fa-check-circle" style="color: var(--success-color);"></i> Delivery to ${code} available -- Expected by Tomorrow, 5 PM | Free Delivery`;
+                res.style.color = "var(--success-color)";
+            } else {
+                res.innerHTML = `<i class="fas fa-exclamation-triangle" style="color: var(--danger-color);"></i> Please enter a valid 6-digit Indian PIN code.`;
+                res.style.color = "var(--danger-color)";
+            }
+        }
+
+        function selectColor(color, btn) {
+            selectedColor = color;
+            document.querySelectorAll('.variant-section:nth-of-type(1) .variant-pill').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('selected-color-label').textContent = color;
+        }
+
+        function selectSize(size, btn) {
+            selectedSize = size;
+            document.querySelectorAll('.variant-section:nth-of-type(2) .variant-pill').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('selected-size-label').textContent = size;
+        }
+
+        function adjustQty(delta) {
+            selectedQty = Math.max(1, selectedQty + delta);
+            document.getElementById('detail-qty-input').value = selectedQty;
+        }
+
+        function buyNow(id) {
+            Storage.addToCart(id, selectedQty, selectedColor, selectedSize);
+            window.location.href = 'checkout.html';
+        }
+    </script>
+</body>
+</html>

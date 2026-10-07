@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - ShopSphere</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="header">
+        <div class="container">
+            <div class="header-top">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-shopping-bag"></i> ShopSphere
+                    <span class="logo-sub">Plus <i class="fas fa-plus-circle"></i></span>
+                </a>
+
+                <div class="search-bar">
+                    <form id="header-search-form" class="search-form">
+                        <input type="text" id="header-search-input" class="search-input" placeholder="Search for products, brands and more..." autocomplete="off">
+                        <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+
+                <div class="header-actions">
+                    <button class="icon-btn" id="theme-toggle-btn" title="Toggle Dark Mode">
+                        <i class="fas fa-moon"></i> Theme
+                    </button>
+
+                    <a href="wishlist.html" class="icon-btn" title="Wishlist">
+                        <i class="far fa-heart"></i> Wishlist
+                        <span class="badge" id="wishlist-count">0</span>
+                    </a>
+
+                    <a href="cart.html" class="icon-btn" title="Shopping Cart">
+                        <i class="fas fa-shopping-cart"></i> Cart
+                        <span class="badge" id="cart-count">0</span>
+                    </a>
+
+                    <div id="auth-status-container">
+                        <a href="login.html" class="auth-btn">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div style="margin: 1.5rem 0;">
+            <h1 class="section-title"><i class="fas fa-shopping-cart"></i> My Shopping Cart</h1>
+        </div>
+
+        <!-- Empty Cart State -->
+        <div id="cart-empty-state" class="no-products-found" style="display: none; margin: 3rem 0;">
+            <i class="fas fa-shopping-basket" style="font-size: 4rem; color: var(--text-light); margin-bottom: 1rem;"></i>
+            <h2>Your Cart is Currently Empty</h2>
+            <p style="color: var(--text-muted); margin: 0.5rem 0 1.5rem;">Explore our wide catalog and add your favorite products to cart!</p>
+            <a href="products.html" class="btn btn-primary"><i class="fas fa-shopping-bag"></i> Shop Now</a>
+        </div>
+
+        <!-- Cart Grid Layout -->
+        <div class="cart-layout">
+            <div id="cart-items-wrapper" class="cart-items-container">
+                <!-- Rendered by js/cart.js -->
+            </div>
+
+            <div id="cart-summary-wrapper">
+                <!-- Rendered by js/cart.js -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+                <p>&copy; 2026 ShopSphere Inc. All rights reserved. Full Stack Mini Project.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Scripts -->
+    <script src="js/products.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/cart.js"></script>
+</body>
+</html>

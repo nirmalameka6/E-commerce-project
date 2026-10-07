@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopSphere - Modern E-Commerce Experience</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="header">
+        <div class="container">
+            <div class="header-top">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-shopping-bag"></i> ShopSphere
+                    <span class="logo-sub">Plus <i class="fas fa-plus-circle"></i></span>
+                </a>
+
+                <div class="search-bar">
+                    <form id="header-search-form" class="search-form">
+                        <input type="text" id="header-search-input" class="search-input" placeholder="Search for products, brands and more..." autocomplete="off">
+                        <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+
+                <div class="header-actions">
+                    <button class="icon-btn" id="theme-toggle-btn" title="Toggle Dark Mode">
+                        <i class="fas fa-moon"></i> Theme
+                    </button>
+
+                    <a href="wishlist.html" class="icon-btn" title="Wishlist">
+                        <i class="far fa-heart"></i> Wishlist
+                        <span class="badge" id="wishlist-count">0</span>
+                    </a>
+
+                    <a href="cart.html" class="icon-btn" title="Shopping Cart">
+                        <i class="fas fa-shopping-cart"></i> Cart
+                        <span class="badge" id="cart-count">0</span>
+                    </a>
+
+                    <div id="auth-status-container">
+                        <a href="login.html" class="auth-btn">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Flipkart-Style Category Ribbon Strip -->
+    <div class="category-ribbon">
+        <div class="container ribbon-container">
+            <div class="ribbon-item" onclick="window.location.href='products.html?deals=true'">
+                <div class="ribbon-icon" style="background-color:#fff3e0; color:#ff9f00;"><i class="fas fa-bolt"></i></div>
+                <span>Top Offers</span>
+            </div>
+            <div class="ribbon-item" onclick="window.location.href='products.html?category=Mobiles'">
+                <div class="ribbon-icon"><i class="fas fa-mobile-alt"></i></div>
+                <span>Mobiles</span>
+            </div>
+            <div class="ribbon-item" onclick="window.location.href='products.html?category=Electronics'">
+                <div class="ribbon-icon" style="background-color:#e8f5e9; color:#388e3c;"><i class="fas fa-plug"></i></div>
+                <span>Electronics</span>
+            </div>
+            <div class="ribbon-item" onclick="window.location.href='products.html?category=Fashion'">
+                <div class="ribbon-icon" style="background-color:#fce4ec; color:#e91e63;"><i class="fas fa-tshirt"></i></div>
+                <span>Fashion</span>
+            </div>
+            <div class="ribbon-item" onclick="window.location.href='products.html?category=Footwear'">
+                <div class="ribbon-icon" style="background-color:#fff8e1; color:#f57f17;"><i class="fas fa-shoe-prints"></i></div>
+                <span>Footwear</span>
+            </div>
+            <div class="ribbon-item" onclick="window.location.href='products.html?category=Beauty'">
+                <div class="ribbon-icon" style="background-color:#f3e5f5; color:#ab47bc;"><i class="fas fa-magic"></i></div>
+                <span>Beauty</span>
+            </div>
+            <div class="ribbon-item" onclick="window.location.href='products.html?category=Toys'">
+                <div class="ribbon-icon" style="background-color:#e1f5fe; color:#0288d1;"><i class="fas fa-gamepad"></i></div>
+                <span>Toys &amp; Gaming</span>
+            </div>
+            <div class="ribbon-item" onclick="window.location.href='products.html?category=Computers'">
+                <div class="ribbon-icon" style="background-color:#e0f2f1; color:#00796b;"><i class="fas fa-laptop"></i></div>
+                <span>Computers</span>
+            </div>
+            <div class="ribbon-item" onclick="window.location.href='products.html?category=Home %26 Kitchen'">
+                <div class="ribbon-icon" style="background-color:#ede7f6; color:#673ab7;"><i class="fas fa-blender"></i></div>
+                <span>Home &amp; Kitchen</span>
+            </div>
+            <div class="ribbon-item" onclick="window.location.href='products.html?category=Watches'">
+                <div class="ribbon-icon" style="background-color:#e0f7fa; color:#00acc1;"><i class="fas fa-clock"></i></div>
+                <span>Watches</span>
+            </div>
+            <div class="ribbon-item" onclick="window.location.href='products.html?category=Bags'">
+                <div class="ribbon-icon" style="background-color:#eef2f7; color:#2874f0;"><i class="fas fa-briefcase"></i></div>
+                <span>Bags &amp; Luggage</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Promo Banner Section -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="hero-banner">
+                    <div class="hero-content">
+                        <span class="hero-badge"><i class="fas fa-bolt"></i> Big Billion Sale Live</span>
+                        <h1 class="hero-title">India's Preferred Shopping Destination <span>ShopSphere</span></h1>
+                        <p class="hero-subtitle">Get Instant 10% Bank Discount on HDFC/ICICI Cards + Extra 5% Unlimited Cashback with ShopSphere Axis Card.</p>
+                        <div class="hero-btns">
+                            <a href="products.html" class="btn btn-accent"><i class="fas fa-shopping-bag"></i> Shop Now</a>
+                            <a href="products.html?deals=true" class="btn btn-outline" style="color:white; border-color:white;"><i class="fas fa-tag"></i> View Deals</a>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80" alt="Mobiles Promo">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Products Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Best of Mobiles, Electronics &amp; Fashion</h2>
+                    <a href="products.html" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size:0.88rem;">VIEW ALL</a>
+                </div>
+                <div id="featured-products-grid" class="products-grid">
+                    <!-- Populated via JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Hot Deals Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header" style="border-left: 4px solid var(--accent-color);">
+                    <h2 class="section-title" style="color: var(--accent-color);">🔥 Deals of the Day | Up to 60% Off</h2>
+                    <a href="products.html?deals=true" class="btn btn-accent" style="padding: 0.4rem 1rem; font-size:0.88rem;">SEE OFFERS</a>
+                </div>
+                <div id="deals-products-grid" class="products-grid">
+                    <!-- Populated via JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Recently Viewed Products Section -->
+        <section id="recently-viewed-section" class="section" style="display: none;">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title"><i class="fas fa-history" style="color: var(--primary-color);"></i> Recently Viewed Items</h2>
+                </div>
+                <div id="recently-viewed-grid" class="products-grid">
+                    <!-- Populated via JavaScript -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h4 class="footer-heading">ABOUT SHOPSPHERE</h4>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">Contact Us</a>
+                        <a href="#" class="footer-link">About Us</a>
+                        <a href="#" class="footer-link">Careers</a>
+                        <a href="#" class="footer-link">ShopSphere Stories</a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="footer-heading">HELP &amp; POLICIES</h4>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">Payments</a>
+                        <a href="#" class="footer-link">Shipping &amp; Delivery</a>
+                        <a href="#" class="footer-link">Cancellation &amp; Returns</a>
+                        <a href="#" class="footer-link">FAQ</a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="footer-heading">CONSUMER POLICY</h4>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">Return Policy</a>
+                        <a href="#" class="footer-link">Terms Of Use</a>
+                        <a href="#" class="footer-link">Security</a>
+                        <a href="#" class="footer-link">Privacy</a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="footer-heading">SOCIAL &amp; CONNECT</h4>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link"><i class="fab fa-facebook"></i> Facebook</a>
+                        <a href="#" class="footer-link"><i class="fab fa-twitter"></i> Twitter</a>
+                        <a href="#" class="footer-link"><i class="fab fa-youtube"></i> YouTube</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 ShopSphere Inc. All rights reserved. Full Stack Mini Project.</p>
+                <div style="display: flex; gap: 1rem; color: #fff;">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fas fa-wallet"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Scripts -->
+    <script src="js/products.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const featuredGrid = document.getElementById('featured-products-grid');
+            const dealsGrid = document.getElementById('deals-products-grid');
+
+            if (featuredGrid) {
+                const featured = ProductRepository.getFeatured().slice(0, 8);
+                featuredGrid.innerHTML = featured.map(p => createProductCardHTML(p)).join('');
+            }
+
+            if (dealsGrid) {
+                const deals = ProductRepository.getDeals().slice(0, 4);
+                dealsGrid.innerHTML = deals.map(p => createProductCardHTML(p)).join('');
+            }
+
+            // Render Recently Viewed Items
+            const recentIds = Storage.getRecentlyViewed();
+            const recentSection = document.getElementById('recently-viewed-section');
+            const recentGrid = document.getElementById('recently-viewed-grid');
+            if (recentIds.length > 0 && recentGrid && recentSection) {
+                const recentProds = recentIds.map(id => ProductRepository.getById(id)).filter(Boolean);
+                if (recentProds.length > 0) {
+                    recentGrid.innerHTML = recentProds.map(p => createProductCardHTML(p)).join('');
+                    recentSection.style.display = 'block';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

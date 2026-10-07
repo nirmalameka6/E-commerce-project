@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - ShopSphere</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="header">
+        <div class="container">
+            <div class="header-top">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-shopping-bag"></i> ShopSphere
+                </a>
+                <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-muted);">
+                    <i class="fas fa-lock" style="color: var(--success-color);"></i> Secure 256-Bit SSL Checkout
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div style="margin: 2rem 0;">
+            <h1 class="section-title"><i class="fas fa-credit-card"></i> Order Checkout</h1>
+        </div>
+
+        <form id="checkout-form" class="cart-layout" style="margin-bottom: 3rem;">
+            <!-- Left Side: Address & Payment Options -->
+            <div style="display: flex; flex-direction: column; gap: 2rem;">
+                
+                <!-- Section 1: Shipping Address -->
+                <div style="background-color: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.75rem;">
+                    <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-map-marker-alt" style="color: var(--primary-color);"></i> 1. Delivery Address
+                    </h2>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label for="address-name" class="form-label">Full Name</label>
+                            <input type="text" id="address-name" class="form-control" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address-phone" class="form-label">Mobile Number</label>
+                            <input type="tel" id="address-phone" class="form-control" placeholder="9876543210" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address-line" class="form-label">Street Address &amp; House No.</label>
+                        <input type="text" id="address-line" class="form-control" placeholder="Flat 402, Sunshine Apartments, Main St" required>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label for="address-city" class="form-label">City</label>
+                            <input type="text" id="address-city" class="form-control" placeholder="Mumbai" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address-state" class="form-label">State</label>
+                            <input type="text" id="address-state" class="form-control" placeholder="Maharashtra" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address-pincode" class="form-label">PIN Code</label>
+                            <input type="text" id="address-pincode" class="form-control" placeholder="400001" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: Payment Method -->
+                <div style="background-color: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.75rem;">
+                    <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-wallet" style="color: var(--accent-color);"></i> 2. Select Payment Method
+                    </h2>
+
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <label style="display: flex; align-items: center; gap: 1rem; padding: 1rem; border: 1.5px solid var(--border-color); border-radius: var(--radius-md); cursor: pointer;">
+                            <input type="radio" name="payment_method" value="COD" checked style="accent-color: var(--primary-color); width: 18px; height: 18px;">
+                            <div>
+                                <strong style="display: block;">Cash on Delivery (COD)</strong>
+                                <span style="font-size: 0.85rem; color: var(--text-muted);">Pay with cash upon delivery</span>
+                            </div>
+                        </label>
+
+                        <label style="display: flex; align-items: center; gap: 1rem; padding: 1rem; border: 1.5px solid var(--border-color); border-radius: var(--radius-md); cursor: pointer;">
+                            <input type="radio" name="payment_method" value="UPI" style="accent-color: var(--primary-color); width: 18px; height: 18px;">
+                            <div>
+                                <strong style="display: block;">UPI (Google Pay / PhonePe / Paytm)</strong>
+                                <span style="font-size: 0.85rem; color: var(--text-muted);">Instant zero-fee UPI payment</span>
+                            </div>
+                        </label>
+
+                        <label style="display: flex; align-items: center; gap: 1rem; padding: 1rem; border: 1.5px solid var(--border-color); border-radius: var(--radius-md); cursor: pointer;">
+                            <input type="radio" name="payment_method" value="Card" style="accent-color: var(--primary-color); width: 18px; height: 18px;">
+                            <div>
+                                <strong style="display: block;">Credit / Debit Card</strong>
+                                <span style="font-size: 0.85rem; color: var(--text-muted);">Visa, MasterCard, RuPay supported</span>
+                            </div>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-accent" style="width: 100%; margin-top: 2rem; padding: 1rem; font-size: 1.1rem;">
+                        <i class="fas fa-check-circle"></i> Place Order Now
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Right Side: Order Summary Sidebar -->
+            <div id="checkout-order-summary" class="order-summary-box">
+                <!-- Populated via js/checkout.js -->
+            </div>
+        </form>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+                <p>&copy; 2026 ShopSphere Inc. All rights reserved. Full Stack Mini Project.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Scripts -->
+    <script src="js/products.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/checkout.js"></script>
+</body>
+</html>

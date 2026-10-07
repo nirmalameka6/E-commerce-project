@@ -1,0 +1,72 @@
+/* ==========================================================================
+   ShopSphere - Dark Mode Override Stylesheet
+   ========================================================================== */
+
+body.dark-mode {
+    --bg-body: #0f172a;
+    --bg-surface: #1e293b;
+    --bg-surface-secondary: #334155;
+    --border-color: #334155;
+    --text-main: #f8fafc;
+    --text-muted: #cbd5e1;
+    --text-light: #94a3b8;
+    --primary-light: rgba(37, 99, 235, 0.2);
+    
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+    --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
+}
+
+body.dark-mode .header {
+    background-color: var(--bg-surface);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .product-card {
+    background-color: var(--bg-surface);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .product-img-wrapper {
+    background-color: #ffffff; /* Keep clean contrast for product images */
+}
+
+body.dark-mode .detail-main-img-container {
+    background-color: #ffffff;
+}
+
+body.dark-mode .cart-item-img {
+    background-color: #ffffff;
+}
+
+body.dark-mode .category-card {
+    background-color: var(--bg-surface);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .category-card:hover {
+    border-color: var(--primary-color);
+}
+
+body.dark-mode .filter-sidebar {
+    background-color: var(--bg-surface);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .sort-select {
+    background-color: var(--bg-surface-secondary);
+    color: var(--text-main);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .form-control {
+    background-color: var(--bg-surface-secondary);
+    color: var(--text-main);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .auth-card {
+    background-color: var(--bg-surface);
+    border-color: var(--border-color);
+}
